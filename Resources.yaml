@@ -12,7 +12,7 @@ resources:
     configuration:     
       sourceArtifactory:    artifactory
       pattern:              team1-gradle-dev-us/com/jfrog/frogsws/
-      target:               tutorial/step3-create-docker-multi-app/package/*.jar
+      target:               gradle_results/
       buildName:            gradle_build   # optional
       buildNumber:          ${run_number}
 
@@ -21,7 +21,7 @@ resources:
     configuration:     
       sourceArtifactory:    artifactory
       pattern:               team1-npm-dev-us/angular-animate/-/angular-animate-1.4.14.tgz
-      target:               tutorial/step3-create-docker-multi-app/package/*.tar.gz
+      target:               npm_results/
       buildName:            npm_build   # optional
       buildNumber:          ${run_number}
 
