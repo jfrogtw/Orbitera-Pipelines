@@ -74,6 +74,12 @@ pipelines:
       - name: npm_docker_build
         type: DockerBuild
         configuration:
+        runtime:
+            type: image
+            image:
+              custom:
+                name: docker
+                tag: "latest"
           dockerFileLocation: tutorial/step3-create-docker-multi-app
           dockerFileName: Dockerfile
        #   dockerImageName: ${dockerImage}
