@@ -73,7 +73,7 @@ pipelines:
       - name: npm_docker_build
         type: DockerBuild
         configuration:
-        runtime:
+          runtime:
             type: image
             image:
               custom:
