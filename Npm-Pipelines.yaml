@@ -77,7 +77,7 @@ pipelines:
           dockerFileLocation: tutorial/step3-create-docker-multi-app
           dockerFileName: Dockerfile
        #   dockerImageName: ${dockerImage}
-          dockerImageName: ${ArtIP}/team1-docker/npm-app
+          dockerImageName: ${ArtIP}:8082/team1-docker/npm-app
           dockerImageTag: ${Version}
           inputResources: 
             - name: orbitera_gitRepo_demo
@@ -88,7 +88,7 @@ pipelines:
             - name: artifactory
         execution:
           onStart:
-            - export ArtIP=$(echo ${int_artifactory_url}|awk -F '/' '{print $3}'|awk -F ':' '{print $1}')
+            - export ArtIP=$(echo ${int_artifactory_url}|awk -F '/' '{print $3}'
             - mkdir -p tutorial/step3-create-docker-multi-app/package
           onSuccess:
             - echo "Congrats The Docker image was build"
