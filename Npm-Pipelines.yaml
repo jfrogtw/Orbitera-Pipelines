@@ -100,7 +100,7 @@ pipelines:
       - name: Npm_docker_push
         type: DockerPush
         configuration:
-          targetRepository:     team1-docker
+          targetRepository:     team1-docker-dev-us
           forceXrayScan:        false
           autoPublishBuildInfo: true
           integrations:
@@ -109,3 +109,29 @@ pipelines:
             - name: npm_docker_build
           outputResources:
             - name: docker_npmBuild_Info
+            
+            
+#       - name: npm_docker_scan
+#         type: XrayScan
+#         configuration:
+#           waitUntilFinish: true
+#           inputResources:
+#             - name: docker_gradleBuild_Info
+#               trigger: true
+#           outputResources: 
+#             - name: scanned_npm_dockerBuild_Info
+
+      - name: npm_docker_promote
+        type: PromoteBuild
+        configuration:
+          targetRepository:      team1-docker-staging-us 
+          includeDependencies:   false   
+          status:                Passed
+          comment:               Artifact passed Xray Scan
+          copy:                  false
+          inputResources:
+            #- name:    scanned_npm_dockerBuild_Info    # optional
+            - name:     docker_npmBuild_Info     # optional
+              trigger: true       
+          outputResources:
+            - name: final_docker_npmBuild_Info         
