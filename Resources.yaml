@@ -54,12 +54,34 @@ resources:
       buildName: gradle_build
       buildNumber: ${run_number}
 
+
+  - name: scanned_gradle_dockerBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactory
+      buildName: gradle_build
+      buildNumber: ${run_number}
+
+
+  - name: promoted_docker_gradleBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactory
+      buildName: gradle_build
+      buildNumber: ${run_number}
+
+
+
+
+
+
   - name: docker_npmBuild_Info
     type: BuildInfo
     configuration:
       sourceArtifactory: artifactory
       buildName: npm_build
       buildNumber: ${run_number}
+
 
   - name: npmBuildInfo
     type: BuildInfo
