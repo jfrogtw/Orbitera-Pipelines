@@ -95,7 +95,6 @@ pipelines:
           onFailure:
             - echo "uh oh, something went wrong"
           onComplete: #always
-            - docker manifest inspect ${ArtIP}:${Version}
             - echo "Cleaning up some stuff"
 
       - name: Npm_docker_push
