@@ -73,7 +73,7 @@ pipelines:
       - name: npm_docker_build
         type: DockerBuild
         configuration:
-          dockerFileLocation: tutorial/step3-create-docker-multi-app
+          dockerFileLocation: tutorial/step2-create-ui-pkg
           dockerFileName: Dockerfile
        #   dockerImageName: ${dockerImage}
           dockerImageName: ${ArtIP}/team1-docker/npm-app
