@@ -80,8 +80,6 @@ pipelines:
             - name: gradle_fileSpec
             - name: promoted_gradleBuild_Info
               trigger: true
-          outputResources: 
-            - name: docker_gradleBuild_Info
           integrations:
             - name: artifactory
         execution:
