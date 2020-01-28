@@ -76,7 +76,7 @@ pipelines:
           dockerFileLocation: tutorial/step2-create-ui-pkg
           dockerFileName: Dockerfile
        #   dockerImageName: ${dockerImage}
-          dockerImageName: ${ArtIP}/team1-docker/npm-app
+          dockerImageName: ${ArtIP}/team1-docker-dev-us/npm-app
           dockerImageTag: ${Version}
           inputResources: 
             - name: orbitera_gitRepo_demo
