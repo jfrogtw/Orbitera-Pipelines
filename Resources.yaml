@@ -71,6 +71,13 @@ resources:
       buildNumber: ${run_number}
 
 
+  - name: final_docker_gradleBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactory
+      buildName: gradle_build
+      buildNumber: ${run_number}
+
 
 
 
