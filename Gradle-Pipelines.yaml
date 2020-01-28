@@ -112,7 +112,8 @@ pipelines:
           inputResources:
             - name:    scanned_gradle_dockerBuild_Info    # optional
               trigger: true       
-          
+          outputResources:
+            - name: promoted_docker_gradleBuild_Info         
 
 
       - name: Gradle_docker_push
@@ -126,7 +127,7 @@ pipelines:
           inputSteps:
             - name: gradle_docker_promote
           outputResources:
-            - name: promoted_docker_gradleBuild_Info
+            - name: final_docker_gradleBuild_Info
  
        
 
