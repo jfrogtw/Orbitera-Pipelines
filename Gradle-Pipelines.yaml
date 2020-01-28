@@ -93,7 +93,7 @@ pipelines:
       - name: Gradle_docker_push
         type: DockerPush
         configuration:
-          targetRepository:     team1-docker
+          targetRepository:     team1-docker-dev-us
           forceXrayScan:        false
           autoPublishBuildInfo: true
           integrations:
@@ -120,7 +120,7 @@ pipelines:
           includeDependencies:   false   
           status:                Passed
           comment:               Artifact passed Xray Scan
-          copy:                  true
+          copy:                  false
           inputResources:
             #- name:    scanned_gradle_dockerBuild_Info    # optional
             - name:     docker_gradleBuild_Info     # optional
