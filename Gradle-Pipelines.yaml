@@ -72,7 +72,7 @@ pipelines:
         configuration:
           dockerFileLocation: tutorial/step1-create-gradle-app
           dockerFileName: Dockerfile
-          dockerImageName: ${ArtIP}/team1-docker/gradle-app       
+          dockerImageName: ${ArtIP}/team1-docker-dev-us/gradle-app       
           dockerImageTag: ${Version}
 #           dockerOptions:
 #             - build_args: BUILD_NUMBER=${$run_number}
