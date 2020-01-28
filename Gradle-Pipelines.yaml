@@ -70,11 +70,12 @@ pipelines:
       - name: Gradle_docker_build
         type: DockerBuild
         configuration:
-          dockerFileLocation: tutorial/step3-create-docker-multi-app
+          dockerFileLocation: tutorial/step1-create-gradle-app
           dockerFileName: Dockerfile
-          dockerImageName: ${ArtIP}/team1-docker/gradle-app
-       #   dockerImageName: ${dockerImage}
+          dockerImageName: ${ArtIP}/team1-docker/gradle-app       
           dockerImageTag: ${Version}
+          dockerOptions:
+            - build_args BUILD_NUMBER=${$run_number}
           inputResources:
             - name: orbitera_gitRepo_demo
             - name: gradle_fileSpec
@@ -102,15 +103,15 @@ pipelines:
           outputResources:
             - name: docker_gradleBuild_Info
  
-      - name: Gradle_docker_scan
-        type: XrayScan
-        configuration:
-          waitUntilFinish: true
-          inputResources:
-            - name: docker_gradleBuild_Info
-              trigger: true
-          outputResources: 
-            - name: scanned_gradle_dockerBuild_Info
+#       - name: Gradle_docker_scan
+#         type: XrayScan
+#         configuration:
+#           waitUntilFinish: true
+#           inputResources:
+#             - name: docker_gradleBuild_Info
+#               trigger: true
+#           outputResources: 
+#             - name: scanned_gradle_dockerBuild_Info
 
       - name: gradle_docker_promote
         type: PromoteBuild
@@ -121,7 +122,8 @@ pipelines:
           comment:               Artifact passed Xray Scan
           copy:                  true
           inputResources:
-            - name:    scanned_gradle_dockerBuild_Info    # optional
+            #- name:    scanned_gradle_dockerBuild_Info    # optional
+            - name:     docker_gradleBuild_Info     # optional
               trigger: true       
           outputResources:
             - name: final_docker_gradleBuild_Info         
