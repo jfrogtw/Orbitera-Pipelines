@@ -91,6 +91,19 @@ pipelines:
             - mkdir -p tutorial/step3-create-docker-multi-app/package
 
 
+      - name: Gradle_docker_push
+        type: DockerPush
+        configuration:
+          targetRepository:     team1-docker
+          forceXrayScan:        false
+          autoPublishBuildInfo: true
+          integrations:
+            - name:  artifactory
+          inputSteps:
+            - name: Gradle_docker_build
+          outputResources:
+            - name: docker_gradleBuild_Info
+ 
       - name: Gradle_docker_scan
         type: XrayScan
         configuration:
@@ -113,22 +126,8 @@ pipelines:
             - name:    scanned_gradle_dockerBuild_Info    # optional
               trigger: true       
           outputResources:
-            - name: promoted_docker_gradleBuild_Info         
+            - name: final_docker_gradleBuild_Info         
 
-
-      - name: Gradle_docker_push
-        type: DockerPush
-        configuration:
-          targetRepository:     team1-docker
-          forceXrayScan:        false
-          autoPublishBuildInfo: true
-          integrations:
-            - name:  artifactory
-          inputSteps:
-            - name: gradle_docker_promote
-          outputResources:
-            - name: final_docker_gradleBuild_Info
- 
        
 
  
