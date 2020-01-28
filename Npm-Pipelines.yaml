@@ -78,7 +78,7 @@ pipelines:
             image:
               custom:
                 name: docker
-                tag: "19.03"
+                tag: "dind"
           dockerFileLocation: tutorial/step3-create-docker-multi-app
           dockerFileName: Dockerfile
        #   dockerImageName: ${dockerImage}
