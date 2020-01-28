@@ -75,7 +75,7 @@ pipelines:
           dockerImageName: ${ArtIP}/team1-docker/gradle-app       
           dockerImageTag: ${Version}
           dockerOptions:
-            - build_args BUILD_NUMBER=${$run_number}
+            - build_args: BUILD_NUMBER=${$run_number}
           inputResources:
             - name: orbitera_gitRepo_demo
             - name: gradle_fileSpec
