@@ -11,8 +11,8 @@ resources:
     type:       FileSpec
     configuration:     
       sourceArtifactory:    artifactory
-      pattern:              team1-gradle-dev-us/com/jfrog/frogsws/
-      target:               gradle_results/
+      pattern:              team1-gradle-dev-us/com/jfrog/frogsws/0.1.0-*/frogsws-0.1.0-*.jar
+      target:               gradle_results/*.jar
       buildName:            gradle_build   # optional
       buildNumber:          ${run_number}
 
@@ -20,7 +20,7 @@ resources:
     type:       FileSpec
     configuration:     
       sourceArtifactory:    artifactory
-      pattern:               team1-npm-dev-us/angular-animate/-/angular-animate-1.4.14.tgz
+      pattern:              team1-npm-dev-us/angular-animate/-/angular-animate-1.4.14.tgz
       target:               npm_results/
       buildName:            npm_build   # optional
       buildNumber:          ${run_number}
