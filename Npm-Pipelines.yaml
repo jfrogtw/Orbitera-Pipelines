@@ -73,12 +73,6 @@ pipelines:
       - name: npm_docker_build
         type: DockerBuild
         configuration:
-          runtime:
-            type: image
-            image:
-              custom:
-                name: docker
-                tag: "dind"
           dockerFileLocation: tutorial/step3-create-docker-multi-app
           dockerFileName: Dockerfile
        #   dockerImageName: ${dockerImage}
@@ -101,6 +95,7 @@ pipelines:
           onFailure:
             - echo "uh oh, something went wrong"
           onComplete: #always
+            - docker manifest inspect ${ArtIP}:${Version}
             - echo "Cleaning up some stuff"
 
       - name: Npm_docker_push
