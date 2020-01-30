@@ -17,7 +17,7 @@ pipelines:
              # THe Docker image is used to support a java 8 image for the gradle build
               name: docker.bintray.io/jfrog/pipelines-u18java
               tag: "8"
-          gradleCommand:        clean artifactoryPublish -b build.gradle
+          gradleCommand:        clean artifactoryPublish -b build.gradle --debug
           sourceLocation:       tutorial/step1-create-gradle-app
           configFileLocation:   .
           configFileName:       jfrog-gradle.yml
