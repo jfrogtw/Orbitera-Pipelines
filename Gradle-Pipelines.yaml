@@ -15,7 +15,7 @@ pipelines:
             image:
              custom:
              # THe Docker image is used to support a java 8 image for the gradle build
-              name: docker.bintray.io/jfrog/pipelines-u16java
+              name: docker.bintray.io/jfrog/pipelines-u18java
               tag: "8"
           gradleCommand:        clean artifactoryPublish -b build.gradle
           sourceLocation:       tutorial/step1-create-gradle-app
