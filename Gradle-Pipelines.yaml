@@ -22,11 +22,9 @@ pipelines:
           configFileLocation:   .
           configFileName:       jfrog-gradle.yml
           forceXrayScan:        false
-          autoPublishBuildInfo: true
+          autoPublishBuildInfo: false
           inputResources:
             - name: orbitera_gitRepo_demo
-          outputResources:
-            - name: gradleBuildInfo
           integrations:
             - name: artifactory
         execution:
@@ -36,7 +34,18 @@ pipelines:
             - export artifactory_plugins_url="${int_artifactory_url}"/jcenter-gradle-remote
             - export artifactory_libs_url="${int_artifactory_url}"/team1-gradle
 
-            
+            pipelines:
+  
+      - name: gradle_build_publish
+        type: PublishBuildInfo
+        configuration:
+          integrations:
+            - name:         artifactory              
+          inputSteps:
+            - name:         gradle_bld_svc_demo 
+          outputResources:
+            - name:         gradleBuildInfo                
+ 
             
       - name: gradle_scan
         type: XrayScan
