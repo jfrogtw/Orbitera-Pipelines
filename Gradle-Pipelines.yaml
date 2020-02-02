@@ -34,16 +34,15 @@ pipelines:
             - export artifactory_libs_url="${int_artifactory_url}"/team1-gradle
 
 
-  
-      - name: gradle_build_publish
+      - name: gradle_buildinfo_publish
         type: PublishBuildInfo
         configuration:
           integrations:
-            - name:         artifactory              
+            - name: artifactory              
           inputSteps:
-            - name:         gradle_bld_svc_demo 
+            - name: gradle_bld_svc_demo 
           outputResources:
-            - name:         gradleBuildInfo                
+            - name: gradleBuildInfo                
  
             
       - name: gradle_scan
