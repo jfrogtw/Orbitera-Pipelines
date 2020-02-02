@@ -21,10 +21,9 @@ pipelines:
           sourceLocation:       tutorial/step1-create-gradle-app
           configFileLocation:   .
           configFileName:       jfrog-gradle.yml
-          forceXrayScan:        false
           autoPublishBuildInfo: true
           inputResources:
-            - name: orbitera_gitRepo_demo
+            - name: orbitera_gitRepo_demo # Change Naming 
           integrations:
             - name: artifactory
           outputResources:
@@ -32,19 +31,9 @@ pipelines:
         execution:
           onStart:
           # Used for internal environment variables for the gradle build
+          # Add inside the project
             - export artifactory_plugins_url="${int_artifactory_url}"/jcenter-gradle-remote
             - export artifactory_libs_url="${int_artifactory_url}"/team1-gradle
-
-
-#       - name: gradle_buildinfo_publish
-#         type: PublishBuildInfo
-#         configuration:
-#           inputSteps:
-#             - name: gradle_bld_svc_demo 
-#           outputResources:
-#             - name: gradleBuildInfo
-#           integrations:
-#             - name: artifactory
  
             
       - name: gradle_scan
@@ -82,8 +71,6 @@ pipelines:
           dockerFileName: Dockerfile
           dockerImageName: ${ArtIP}/team1-docker-dev-us/gradle-app       
           dockerImageTag: ${Version}
-#           dockerOptions:
-#             - build_args: BUILD_NUMBER=${$run_number}
           inputResources:
             - name: orbitera_gitRepo_demo
             - name: gradle_fileSpec
@@ -94,8 +81,6 @@ pipelines:
         execution:
           onStart: 
             - export ArtIP=$(echo ${int_artifactory_url}|awk -F '/' '{print $3}')
-            - mkdir -p tutorial/step3-create-docker-multi-app/package
-
 
       - name: Gradle_docker_push
         type: DockerPush
@@ -129,8 +114,7 @@ pipelines:
           comment:               Artifact passed Xray Scan
           copy:                  false
           inputResources:
-            #- name:    scanned_gradle_dockerBuild_Info    # optional
-            - name:     docker_gradleBuild_Info     # optional
+            - name:    scanned_gradle_dockerBuild_Info    # optional
               trigger: true       
           outputResources:
             - name: final_docker_gradleBuild_Info         
