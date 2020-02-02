@@ -28,13 +28,7 @@ pipelines:
             - name: artifactory
           outputResources:
             - name: gradleBuildInfo
-        execution:
-          onStart:
-          # Used for internal environment variables for the gradle build
-          # Add inside the project
-#             - export artifactory_plugins_url="${int_artifactory_url}"/jcenter-gradle-remote
-#             - export artifactory_libs_url="${int_artifactory_url}"/team1-gradle
- 
+      
             
       - name: gradle_scan
         type: XrayScan
@@ -80,13 +74,14 @@ pipelines:
             - name: artifactory
         execution:
           onStart: 
+          # export artifactory ip from internal build env var to tag the docker image
             - export ArtIP=$(echo ${int_artifactory_url}|awk -F '/' '{print $3}')
+
 
       - name: Gradle_docker_push
         type: DockerPush
         configuration:
           targetRepository:     team1-docker-dev-us
-          forceXrayScan:        false
           autoPublishBuildInfo: true
           integrations:
             - name:  artifactory
