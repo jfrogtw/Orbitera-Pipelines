@@ -30,11 +30,10 @@ pipelines:
         execution:
           onStart:
           # Used for internal environment variables for the gradle build
-            - echo java --version
             - export artifactory_plugins_url="${int_artifactory_url}"/jcenter-gradle-remote
             - export artifactory_libs_url="${int_artifactory_url}"/team1-gradle
 
-            pipelines:
+
   
       - name: gradle_build_publish
         type: PublishBuildInfo
