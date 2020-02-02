@@ -1,5 +1,5 @@
 resources:
-  - name: orbitera_gitRepo_demo
+  - name: gitRepo_source
     type: GitRepo
     configuration:
       path: yairbass/project-examples
