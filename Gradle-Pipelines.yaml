@@ -27,6 +27,8 @@ pipelines:
             - name: orbitera_gitRepo_demo
           integrations:
             - name: artifactory
+          outputResources:
+            - name: gradleBuildInfo
         execution:
           onStart:
           # Used for internal environment variables for the gradle build
