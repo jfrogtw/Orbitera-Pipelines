@@ -37,12 +37,12 @@ pipelines:
       - name: gradle_buildinfo_publish
         type: PublishBuildInfo
         configuration:
-          integrations:
-            - name: artifactory             
           inputSteps:
             - name: gradle_bld_svc_demo 
           outputResources:
-            - name: gradleBuildInfo                
+            - name: gradleBuildInfo     
+          integrations:
+            - name: artifactory
  
             
       - name: gradle_scan
