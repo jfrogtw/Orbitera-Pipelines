@@ -32,8 +32,8 @@ pipelines:
           onStart:
           # Used for internal environment variables for the gradle build
           # Add inside the project
-            - export artifactory_plugins_url="${int_artifactory_url}"/jcenter-gradle-remote
-            - export artifactory_libs_url="${int_artifactory_url}"/team1-gradle
+#             - export artifactory_plugins_url="${int_artifactory_url}"/jcenter-gradle-remote
+#             - export artifactory_libs_url="${int_artifactory_url}"/team1-gradle
  
             
       - name: gradle_scan
