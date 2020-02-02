@@ -24,6 +24,7 @@ pipelines:
             - name: orbitera_gitRepo_demo
         execution:
           onStart:
+          # The project requires the module to run tests
             - npm install shelljs
 
 
@@ -32,7 +33,6 @@ pipelines:
         type: NpmPublish
         configuration:
           repositoryName:       team1-npm
-          forceXrayScan:        false
           autoPublishBuildInfo: true
           integrations:
             - name: artifactory
@@ -75,7 +75,6 @@ pipelines:
         configuration:
           dockerFileLocation: tutorial/step2-create-ui-pkg
           dockerFileName: Dockerfile
-       #   dockerImageName: ${dockerImage}
           dockerImageName: ${ArtIP}/team1-docker-dev-us/npm-app
           dockerImageTag: ${Version}
           inputResources: 
@@ -88,7 +87,7 @@ pipelines:
         execution:
           onStart:
             - export ArtIP=$(echo ${int_artifactory_url}|awk -F '/' '{print $3}')
-            - mkdir -p tutorial/step3-create-docker-multi-app/package
+            - mkdir -p Npm_target
           onSuccess:
             - echo "Congrats The Docker image was build"
 
@@ -101,7 +100,6 @@ pipelines:
         type: DockerPush
         configuration:
           targetRepository:     team1-docker-dev-us
-          forceXrayScan:        false
           autoPublishBuildInfo: true
           integrations:
             - name:  artifactory
@@ -111,15 +109,15 @@ pipelines:
             - name: docker_npmBuild_Info
             
             
-#       - name: npm_docker_scan
-#         type: XrayScan
-#         configuration:
-#           waitUntilFinish: true
-#           inputResources:
-#             - name: docker_gradleBuild_Info
-#               trigger: true
-#           outputResources: 
-#             - name: scanned_npm_dockerBuild_Info
+      - name: npm_docker_scan
+        type: XrayScan
+        configuration:
+          waitUntilFinish: true
+          inputResources:
+            - name: docker_npmBuild_Info
+              trigger: true
+          outputResources: 
+            - name: scanned_npm_dockerBuild_Info
 
       - name: npm_docker_promote
         type: PromoteBuild
@@ -130,8 +128,7 @@ pipelines:
           comment:               Artifact passed Xray Scan
           copy:                  false
           inputResources:
-            #- name:    scanned_npm_dockerBuild_Info    # optional
-            - name:     docker_npmBuild_Info     # optional
+            - name:    scanned_npm_dockerBuild_Info    # optional
               trigger: true       
           outputResources:
             - name: final_docker_npmBuild_Info         
