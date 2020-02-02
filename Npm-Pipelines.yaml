@@ -21,7 +21,7 @@ pipelines:
           integrations:
             - name: artifactory
           inputResources:
-            - name: orbitera_gitRepo_demo
+            - name: gitRepo_source
         execution:
           onStart:
           # The project requires the module to run tests
@@ -78,7 +78,7 @@ pipelines:
           dockerImageName: ${ArtIP}/team1-docker-dev-us/npm-app
           dockerImageTag: ${Version}
           inputResources: 
-            - name: orbitera_gitRepo_demo
+            - name: gitRepo_source
             - name: npm_fileSpec
             - name: promoted_npmBuild_Info
               trigger: true
