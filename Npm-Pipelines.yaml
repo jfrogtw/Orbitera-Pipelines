@@ -9,8 +9,8 @@ pipelines:
       - name: npm_compile
         type: NpmBuild
         configuration:
-          runtime:
-            type: image
+#           runtime:
+#             type: image
 #             image:
 #               custom:
 #                 name: docker.bintray.io/jfrog/pipelines-u18node
