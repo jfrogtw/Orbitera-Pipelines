@@ -24,9 +24,9 @@ pipelines:
             - name: gitRepo_source
         execution:
           onStart:
-            - printenv
-            - export NpmVersion=${Version}
-
+            - pushd $res_myGitRepoResourceName_resourcePath/tutorial/step2-create-ui-pkg
+            - sed -i 's/0.3.0/${Version}/g' package.json
+            - popd
 
       - name: npm_publish
         type: NpmPublish
