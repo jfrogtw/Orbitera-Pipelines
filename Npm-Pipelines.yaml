@@ -59,6 +59,9 @@ pipelines:
             - name: npm_pack_frontend
           outputResources:
             - name: npmBuildInfo
+        execution:
+          onStart:
+            - export inputNpmBuildStepName="npm_compile"
 
 
       - name: npm_scan
