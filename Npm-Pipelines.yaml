@@ -25,7 +25,7 @@ pipelines:
         execution:
           onStart:
           # The project requires the module to run tests
-            - sed 's/0.3.0/${Version}/g' package.json
+            - sed -i 's/0.3.0/${Version}/g' package.json
             - npm install shelljs
 
 
