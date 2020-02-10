@@ -24,10 +24,9 @@ pipelines:
             - name: gitRepo_source
         execution:
           onStart:
-            
             - pushd ${res_gitRepo_source_resourcePath}/tutorial/step2-create-ui-pkg
+            - npm install shelljs
             - npm version ${Version} --no-git-tag-version
-           # - sed -i "s/0.3.0/$Version/g" package.json
             - popd
 
       - name: npm_publish
