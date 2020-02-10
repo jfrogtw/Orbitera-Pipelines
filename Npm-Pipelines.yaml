@@ -42,7 +42,7 @@ pipelines:
             - restore_run_files npmBuildInputGitRepo $tempStateLocation
             - pushd $tempStateLocation
             - npm install shelljs
-            - npm run build
+            - npm install
             - add_run_files $tempStateLocation/. npmBuildInputGitRepo
 
 
