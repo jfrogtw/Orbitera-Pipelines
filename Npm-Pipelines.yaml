@@ -26,7 +26,7 @@ pipelines:
           onStart:
             - pushd ${res_gitRepo_source_resourcePath}/tutorial/step2-create-ui-pkg
             - ls
-            - sed -i 's/0.3.0/${Version}/g' package.json
+            - sed -i 's/0.3.0/$Version/g' package.json
             - cat package.json
             - popd
 
