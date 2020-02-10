@@ -24,7 +24,7 @@ pipelines:
             - name: gitRepo_source
         execution:
           onStart:
-          # The project requires the module to run tests
+            - ls
             - sed -i 's/0.3.0/${Version}/g' package.json
             - npm install shelljs
 
