@@ -24,9 +24,9 @@ pipelines:
             - name: gitRepo_source
         execution:
           onStart:
-            - echo $(ls)
-            - echo $(sed -i 's/0.3.0/${Version}/g' package.json)
-            - npm install shelljs
+#             - echo $(ls)
+#             - echo $(sed -i 's/0.3.0/${Version}/g' package.json)
+#             - npm install shelljs
 
 
 
