@@ -38,11 +38,10 @@ pipelines:
             - name: artifactory
         execution:
           onStart:
-            - export tempStateLocation="$step_tmp_dir/npmSourceState"
+            - export tempStateLocation="$step_tmp_dir/npmSourceState/tutorial/step2-create-ui-pkg"
             - restore_run_files npmBuildInputGitRepo $tempStateLocation
             - printenv
             - pushd $tempStateLocation
-            - ls
             - npm install shelljs
             - npm install
             - add_run_files $tempStateLocation/. npmBuildInputGitRepo
