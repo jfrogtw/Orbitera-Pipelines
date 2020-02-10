@@ -24,6 +24,7 @@ pipelines:
             - name: gitRepo_source
         execution:
           onStart:
+            - npm version ${Version} --force --no-git-tag-version
             - pushd ${res_gitRepo_source_resourcePath}/tutorial/step2-create-ui-pkg
             - sed -i "s/0.3.0/$Version/g" package.json
             - popd
