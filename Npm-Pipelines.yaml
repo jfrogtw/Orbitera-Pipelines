@@ -24,7 +24,8 @@ pipelines:
             - name: gitRepo_source
         execution:
           onStart:
-            - pushd $res_myGitRepoResourceName_resourcePath/tutorial/step2-create-ui-pkg
+            - pushd ${res_myGitRepoResourceName_resourcePath} # /tutorial/step2-create-ui-pkg
+            - ls
             - sed -i 's/0.3.0/${Version}/g' package.json
             - popd
 
