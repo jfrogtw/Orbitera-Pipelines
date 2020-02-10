@@ -159,7 +159,7 @@ resources:
       sourceDistribution:   distribution
       serviceName:          edge-jpd
       siteName:             "edge-jpd"
-      cityName:             "*"
+#      cityName:             "*"
       countryCodes:
         - "*"
 
