@@ -15,7 +15,7 @@ pipelines:
               custom:
                 name: docker.bintray.io/jfrog/pipelines-u18node
                 tag: "10.16.3"
-          npmArgs:   --no-progress --no-audit
+          npmArgs:   install
           repositoryName:   team1-npm-dev-us
           sourceLocation:   tutorial/step2-create-ui-pkg
           integrations:
