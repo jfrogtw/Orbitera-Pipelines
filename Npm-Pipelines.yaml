@@ -22,6 +22,9 @@ pipelines:
             - name: artifactory
           inputResources:
             - name: gitRepo_source
+        execution:
+          onStart:
+            - export Version=${Version}
 
 
       - name: npm_publish
