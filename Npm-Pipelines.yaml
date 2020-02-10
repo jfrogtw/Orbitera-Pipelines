@@ -29,6 +29,25 @@ pipelines:
             - npm version ${Version} --no-git-tag-version
             - popd
 
+
+      - name: npm_pack_frontend
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: npm_compile
+          integrations:
+            - name: artifactory
+        execution:
+          onStart:
+            - export tempStateLocation="$step_tmp_dir/npmSourceState"
+            - restore_run_files npmBuildInputGitRepo $tempStateLocation
+            - pushd $tempStateLocation
+            - npm run build
+            - add_run_files $tempStateLocation/. npmBuildInputGitRepo
+
+
+
+
       - name: npm_publish
         type: NpmPublish
         configuration:
@@ -37,7 +56,7 @@ pipelines:
           integrations:
             - name: artifactory
           inputSteps:
-            - name: npm_compile
+            - name: npm_pack_frontend
           outputResources:
             - name: npmBuildInfo
 
