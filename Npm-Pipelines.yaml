@@ -40,6 +40,8 @@ pipelines:
           onStart:
             - export tempStateLocation="$step_tmp_dir/npmSourceState"
             - restore_run_files npmBuildInputGitRepo $tempStateLocation
+            - printenv
+            - echo $tempStateLocation
             - pushd $tempStateLocation
             - npm install shelljs
             - npm install
