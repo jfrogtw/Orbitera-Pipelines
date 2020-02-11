@@ -45,6 +45,7 @@ pipelines:
             # Restore file from previous step to current step
             - restore_run_files npmBuildInputGitRepo $tempStateLocation
             - pushd $tempStateLocation
+            - ls
             - npm install shelljs
             - npm install
             # Add files to npm pipeline target
