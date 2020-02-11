@@ -2,7 +2,7 @@ resources:
   - name: gitRepo_source
     type: GitRepo
     configuration:
-      path: yairbass/project-examples
+      path: jfrogtraining/project-examples
       gitProvider: GitRepo
       branches:
         include: eplus-v2-orbitera
