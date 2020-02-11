@@ -28,9 +28,7 @@ pipelines:
             - name: artifactory
           outputResources:
             - name: gradleBuildInfo
-        execution:
-          onStart:
-            - gradle wrapper --gradle-version 6.1.1
+     
 
 
       
