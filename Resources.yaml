@@ -6,6 +6,14 @@ resources:
       gitProvider: GitRepo
       branches:
         include: eplus-v2-orbitera
+        
+  - name: gitRepo_code
+    type: GitRepo
+    configuration:
+      path: jfrogtraining/project-examples
+      gitProvider: GitRepo
+      branches:
+        include: eplus-v2-orbitera
 
   - name:       gradle_fileSpec
     type:       FileSpec
