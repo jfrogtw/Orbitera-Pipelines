@@ -116,9 +116,14 @@ pipelines:
             - pushd ${res_gitRepo_source_resourcePath}/tutorial/step2-create-ui-pkg
             # Creating a Folder for the fileSpec Target
             - mkdir -p npm_results
+          onExecute:
+            - ls
+            - popd npm_results
             - ls
           onSuccess:
             - echo "Congrats The Docker image was build"
+        
+            
 
 
       - name: Npm_docker_push
