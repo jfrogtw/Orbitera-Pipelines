@@ -4,6 +4,7 @@ pipelines:
     configuration:
       environmentVariables:
         readOnly:
+          ArtIP: $(echo ${int_artifactory_url}|awk -F '/' '{print $3}')
           Version: 1.0.$run_number
     steps:
       - name: npm_compile
@@ -13,7 +14,7 @@ pipelines:
             type: image
             image:
               custom:
-                name: docker.bintray.io/jfrog/pipelines-u18node
+                name: ${ArtIP}/pipelines-docker/jfrog/pipelines-u18node
                 tag: "10.16.3"
           npmArgs:   install
           repositoryName:   team1-npm
@@ -38,11 +39,14 @@ pipelines:
             - name: artifactory
         execution:
           onStart:
+          
             - export tempStateLocation="$step_tmp_dir/npmSourceState/tutorial/step2-create-ui-pkg"
+            # Restore file from previous step to current step
             - restore_run_files npmBuildInputGitRepo $tempStateLocation
             - pushd $tempStateLocation
             - npm install shelljs
             - npm install
+            # Add files to npm pipeline target
             - add_run_files $tempStateLocation/. npmBuildInputGitRepo
 
 
@@ -108,7 +112,7 @@ pipelines:
             - name: artifactory
         execution:
           onStart:
-            - export ArtIP=$(echo ${int_artifactory_url}|awk -F '/' '{print $3}')
+            #- export ArtIP=$(echo ${int_artifactory_url}|awk -F '/' '{print $3}')
             # Creating a Folder for the fileSpec Target
             - mkdir -p Npm_result
           onSuccess:
