@@ -39,7 +39,6 @@ pipelines:
             - name: artifactory
         execution:
           onStart:
-            ${res_gitRepo_source_resourcePath}/tutorial/step2-create-ui-pkg
            # - export tempStateLocation="$step_tmp_dir/npmSourceState/tutorial/step2-create-ui-pkg"
             - export tempStateLocation="${res_gitRepo_source_resourcePath}/tutorial/step2-create-ui-pkg"
             # Restore file from previous step to current step
