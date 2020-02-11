@@ -21,7 +21,7 @@ pipelines:
           sourceLocation:   tutorial/step2-create-ui-pkg
           integrations:
             - name: artifactory
-            - name: int_docker
+            - name: docker_reg
           inputResources:
             - name: gitRepo_source
         execution:
