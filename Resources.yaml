@@ -5,8 +5,8 @@ resources:
       path: yairbass/project-examples
       gitProvider: GitRepo
       branches:
-        include: eplus-v2-orbitera
-
+        include: orbitera-pipelines-2
+        
   - name:       gradle_fileSpec
     type:       FileSpec
     configuration:     
