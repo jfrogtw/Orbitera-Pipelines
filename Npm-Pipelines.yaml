@@ -22,7 +22,7 @@ pipelines:
           integrations:
             - name: artifactory
           inputResources:
-            - name: gitRepo_source
+            - name: gitRepo_code
         execution:
           onStart:
             - pushd ${res_gitRepo_source_resourcePath}/tutorial/step2-create-ui-pkg
@@ -105,7 +105,7 @@ pipelines:
           dockerImageName: ${ArtIP}/team1-docker-dev-us/npm-app
           dockerImageTag: ${Version}
           inputResources: 
-            - name: gitRepo_source
+            - name: gitRepo_code
             - name: npm_fileSpec
             - name: promoted_npmBuild_Info
               trigger: true
