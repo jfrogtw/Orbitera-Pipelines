@@ -23,7 +23,7 @@ pipelines:
           configFileName:       jfrog-gradle.yml
           autoPublishBuildInfo: true
           inputResources:
-            - name:  gitRepo_source
+            - name:  gitRepo_code
           integrations:
             - name: artifactory
           outputResources:
@@ -69,7 +69,7 @@ pipelines:
           dockerImageName: ${ArtIP}/team1-docker-dev-us/gradle-app       
           dockerImageTag: ${Version}
           inputResources:
-            - name: gitRepo_source
+            - name: gitRepo_code
             - name: gradle_fileSpec
             - name: promoted_gradleBuild_Info
               trigger: true
