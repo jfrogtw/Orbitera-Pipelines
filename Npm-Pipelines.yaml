@@ -112,9 +112,11 @@ pipelines:
             - name: artifactory
         execution:
           onStart:
+            - printenv
             - pushd ${res_gitRepo_source_resourcePath}/tutorial/step2-create-ui-pkg
             # Creating a Folder for the fileSpec Target
             - mkdir -p npm_results
+            - ls
           onSuccess:
             - echo "Congrats The Docker image was build"
 
