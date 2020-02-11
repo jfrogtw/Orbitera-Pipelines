@@ -21,7 +21,7 @@ resources:
     configuration:     
       sourceArtifactory:    artifactory
       pattern:              team1-npm-dev-us/angular-animate/-/angular-animate-1.4.14.tgz
-      target:               ${res_gitRepo_source_resourcePath}/tutorial/step2-create-ui-pkg/npm_results/
+      target:               npm_results/
       buildName:            npm_build   # optional
       buildNumber:          ${run_number}
 
