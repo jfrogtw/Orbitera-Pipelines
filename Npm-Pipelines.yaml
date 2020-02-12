@@ -5,7 +5,7 @@ pipelines:
       environmentVariables:
         readOnly:
           ArtIP: $(echo ${int_artifactory_url}|awk -F '/' '{print $3}')
-          Version: 1.0.$run_number
+          Version: 1.1.$run_number
     steps:
       - name: npm_compile
         type: NpmBuild
@@ -45,7 +45,7 @@ pipelines:
             - pushd $tempStateLocation/tutorial/step2-create-ui-pkg
             - ls
             - npm install shelljs
-            - npm install forgsui-${Version}.tgz
+            - npm install 
             # Add files to npm pipeline target
             - add_run_files $tempStateLocation/. npmBuildInputGitRepo
             - popd
