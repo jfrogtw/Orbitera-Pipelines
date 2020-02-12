@@ -33,15 +33,15 @@ pipelines:
 
       
             
-#       - name: gradle_scan
-#         type: XrayScan
-#         configuration:
-#           waitUntilFinish: true
-#           inputResources:
-#             - name: gradleBuildInfo
-#               trigger: true
-#           outputResources: 
-#             - name: scanned_gradleBuild_Info
+      - name: gradle_scan
+        type: XrayScan
+        configuration:
+          waitUntilFinish: true
+          inputResources:
+            - name: gradleBuildInfo
+              trigger: true
+          outputResources: 
+            - name: scanned_gradleBuild_Info
 
             
                      
@@ -54,7 +54,7 @@ pipelines:
           comment:               Artifact passed Xray Scan
           copy:                  true
           inputResources:
-            - name:    gradleBuildInfo    # optional
+            - name:    scanned_gradleBuild_Info    # optional
               trigger: true       
           outputResources:
             - name: promoted_gradleBuild_Info
