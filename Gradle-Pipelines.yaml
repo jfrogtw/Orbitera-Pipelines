@@ -3,7 +3,7 @@ pipelines:
     configuration:
       environmentVariables:
         readOnly:
-          Version: 1.0.$run_number
+          Version: 1.1.$run_number
           
 
     steps:
