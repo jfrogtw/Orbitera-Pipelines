@@ -66,7 +66,7 @@ pipelines:
           inputSteps:
             - name:    npm_publish
           outputResources:
-            - name:     npmBuild_Info
+            - name:     npmBuildInfo
      
      
       - name: npm_promote
@@ -78,7 +78,7 @@ pipelines:
           comment:               Artifact passed Xray Scan
           copy:                  true
           inputResources:
-            - name:    npmBuild_Info    # optional
+            - name:    npmBuildInfo    # optional
               trigger: true       
           outputResources:
             - name: promoted_npmBuild_Info
