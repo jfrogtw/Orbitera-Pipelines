@@ -7,7 +7,7 @@ pipelines:
           ArtIP: $(echo ${int_artifactory_url}|awk -F '/' '{print $3}')
           Version: 1.1.$run_number
     steps:
-      - name: npm_compile
+      - name: npm_prep
         type: NpmBuild
         configuration:
           runtime:
