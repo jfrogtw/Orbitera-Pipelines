@@ -1,11 +1,4 @@
 resources:
-  - name: gitRepo_source
-    type: GitRepo
-    configuration:
-      path: yairbass/project-examples
-      gitProvider: GitRepo
-      branches:
-        include: eplus-v2-orbitera
         
   - name: gitRepo_code
     type: GitRepo
