@@ -34,7 +34,7 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: npm_compile
+            - name: npm_prep
           integrations:
             - name: artifactory
         execution:
