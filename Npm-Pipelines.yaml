@@ -79,7 +79,7 @@ pipelines:
        
        
       - name: npm_scan_publish
-        type: NpmPublish
+        type: PublishBuildInfo
         configuration:
           repositoryName:       team1-npm
           autoPublishBuildInfo: true
