@@ -28,8 +28,6 @@ pipelines:
             - pushd ${res_gitRepo_code_resourcePath}/tutorial/step2-create-ui-pkg
             - npm version ${Version} --no-git-tag-version
             - popd
-
-
       - name: npm_compile
         type: Bash
         configuration:
@@ -48,34 +46,28 @@ pipelines:
             # Add files to npm pipeline target
             - add_run_files $tempStateLocation/. npmBuildInputGitRepo
             - popd
-
-
       - name: npm_publish
         type: NpmPublish
         configuration:
-          repositoryName:   team1-npm
-          #autoPublishBuildInfo: true
+          repositoryName:       team1-npm
+          autoPublishBuildInfo: true
           integrations:
             - name: artifactory
           inputSteps:
             - name: npm_compile
-           
+          outputResources:
+            - name: npmBuildInfo
         execution:
           onStart:
             - export inputNpmBuildStepName="npm_prep"
-
-
       - name: npm_scan_publish
         type: PublishBuildInfo
         configuration:
           forceXrayScan:    True
           inputSteps:
-            - name:    npm_publish
+            - name:         npm_publish
           outputResources:
-            - name:   npmBuild_Info
-       
-
-            
+            - name:     scanned_npmBuild_Info
       - name: npm_promote
         type: PromoteBuild
         configuration:
@@ -85,14 +77,10 @@ pipelines:
           comment:               Artifact passed Xray Scan
           copy:                  true
           inputResources:
-            - name:    npmBuild_Info    # optional
+            - name:    scanned_npmBuild_Info    # optional
               trigger: true       
           outputResources:
             - name: promoted_npmBuild_Info
-
-
-#-------------------------Docker ----------------------------------------
-
       - name: npm_docker_build
         type: DockerBuild
         configuration:
@@ -115,9 +103,6 @@ pipelines:
             - popd
           onSuccess:
             - echo "Congrats The Docker image was build"
-        
-
-
       - name: Npm_docker_push
         type: DockerPush
         configuration:
@@ -129,8 +114,6 @@ pipelines:
             - name: npm_docker_build
           outputResources:
             - name: docker_npmBuild_Info
-            
-            
       - name: npm_docker_scan
         type: XrayScan
         configuration:
@@ -140,7 +123,6 @@ pipelines:
               trigger: true
           outputResources: 
             - name: scanned_npm_dockerBuild_Info
-
       - name: npm_docker_promote
         type: PromoteBuild
         configuration:
@@ -153,4 +135,4 @@ pipelines:
             - name:    scanned_npm_dockerBuild_Info    # optional
               trigger: true       
           outputResources:
-            - name: final_docker_npmBuild_Info         
+            - name: final_docker_npmBuild_Info 
