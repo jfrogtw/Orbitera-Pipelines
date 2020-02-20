@@ -47,7 +47,7 @@ pipelines:
             - add_run_files $tempStateLocation/. npmBuildInputGitRepo
             - popd
   
-     - name: npm_publish
+      - name: npm_publish
         type: NpmPublish
         configuration:
           repositoryName:       team1-npm
