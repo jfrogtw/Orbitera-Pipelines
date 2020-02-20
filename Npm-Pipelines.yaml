@@ -80,7 +80,6 @@ pipelines:
         type: PublishBuildInfo
         configuration:
           forceXrayScan:    True
-          integrations:
           inputSteps:
             - name:         npm_publish
           outputResources:
