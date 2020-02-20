@@ -46,20 +46,19 @@ pipelines:
             # Add files to npm pipeline target
             - add_run_files $tempStateLocation/. npmBuildInputGitRepo
             - popd
-      - name: npm_publish
+  
+     - name: npm_publish
         type: NpmPublish
         configuration:
           repositoryName:       team1-npm
-          autoPublishBuildInfo: true
           integrations:
             - name: artifactory
           inputSteps:
             - name: npm_compile
-          outputResources:
-            - name: npmBuildInfo
         execution:
           onStart:
             - export inputNpmBuildStepName="npm_prep"
+            
       - name: npm_scan_publish
         type: PublishBuildInfo
         configuration:
@@ -67,7 +66,7 @@ pipelines:
           inputSteps:
             - name:         npm_publish
           outputResources:
-            - name:     scanned_npmBuild_Info
+            - name:     npmBuild_Info
       - name: npm_promote
         type: PromoteBuild
         configuration:
@@ -77,10 +76,11 @@ pipelines:
           comment:               Artifact passed Xray Scan
           copy:                  true
           inputResources:
-            - name:    scanned_npmBuild_Info    # optional
+            - name:    npmBuild_Info    # optional
               trigger: true       
           outputResources:
             - name: promoted_npmBuild_Info
+            
       - name: npm_docker_build
         type: DockerBuild
         configuration:
