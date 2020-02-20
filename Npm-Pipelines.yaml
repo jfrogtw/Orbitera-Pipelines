@@ -81,7 +81,6 @@ pipelines:
         configuration:
           forceXrayScan:    True
           integrations:
-            - name:         artifactory                # required
           inputSteps:
             - name:         npm_publish
           outputResources:
