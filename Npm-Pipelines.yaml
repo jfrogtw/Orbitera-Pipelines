@@ -61,9 +61,9 @@ pipelines:
             - name: npm_compile
           outputResources:
             - name: npmBuildInfo
-       execution:
-         onStart:
-           - export inputNpmBuildStepName="npm_prep"
+        execution:
+          onStart:
+            - export inputNpmBuildStepName="npm_prep"
 
 
       - name: npm_scan_publish
