@@ -101,7 +101,7 @@ pipelines:
           inputResources: 
             - name: gitRepo_code
             - name: npm_fileSpec
-            - name: promoted_npmBuild_Info
+#             - name: promoted_npmBuild_Info
               trigger: true
           integrations:
             - name: artifactory
