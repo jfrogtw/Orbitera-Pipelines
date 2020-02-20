@@ -91,64 +91,64 @@ pipelines:
           outputResources:
             - name: promoted_npmBuild_Info
 
-#       - name: npm_docker_build
-#         type: DockerBuild
-#         configuration:
-#           dockerFileLocation: tutorial/step2-create-ui-pkg
-#           dockerFileName: Dockerfile
-#           dockerImageName: ${ArtIP}/team1-docker-dev-us/npm-app
-#           dockerImageTag: ${Version}
-#           inputResources: 
-#             - name: gitRepo_code
-#             - name: npm_fileSpec
-#             - name: promoted_npmBuild_Info
-#               trigger: true
-#           integrations:
-#             - name: artifactory
-#         execution:
-#           onStart:
-#             - pushd ${res_gitRepo_code_resourcePath}/tutorial/step2-create-ui-pkg
-#             # Creating a Folder for the fileSpec Target
-#             - mkdir -p npm_results
-#             - popd
-#           onSuccess:
-#             - echo "Congrats The Docker image was build"
+      - name: npm_docker_build
+        type: DockerBuild
+        configuration:
+          dockerFileLocation: tutorial/step2-create-ui-pkg
+          dockerFileName: Dockerfile
+          dockerImageName: ${ArtIP}/team1-docker-dev-us/npm-app
+          dockerImageTag: ${Version}
+          inputResources: 
+            - name: gitRepo_code
+            - name: npm_fileSpec
+            - name: promoted_npmBuild_Info
+              trigger: true
+          integrations:
+            - name: artifactory
+        execution:
+          onStart:
+            - pushd ${res_gitRepo_code_resourcePath}/tutorial/step2-create-ui-pkg
+            # Creating a Folder for the fileSpec Target
+            - mkdir -p npm_results
+            - popd
+          onSuccess:
+            - echo "Congrats The Docker image was build"
         
 
 
-#       - name: Npm_docker_push
-#         type: DockerPush
-#         configuration:
-#           targetRepository:     team1-docker-dev-us
-#           autoPublishBuildInfo: true
-#           integrations:
-#             - name:  artifactory
-#           inputSteps:
-#             - name: npm_docker_build
-#           outputResources:
-#             - name: docker_npmBuild_Info
+      - name: Npm_docker_push
+        type: DockerPush
+        configuration:
+          targetRepository:     team1-docker-dev-us
+          autoPublishBuildInfo: true
+          integrations:
+            - name:  artifactory
+          inputSteps:
+            - name: npm_docker_build
+          outputResources:
+            - name: docker_npmBuild_Info
             
             
-#       - name: npm_docker_scan
-#         type: XrayScan
-#         configuration:
-#           waitUntilFinish: true
-#           inputResources:
-#             - name: docker_npmBuild_Info
-#               trigger: true
-#           outputResources: 
-#             - name: scanned_npm_dockerBuild_Info
+      - name: npm_docker_scan
+        type: XrayScan
+        configuration:
+          waitUntilFinish: true
+          inputResources:
+            - name: docker_npmBuild_Info
+              trigger: true
+          outputResources: 
+            - name: scanned_npm_dockerBuild_Info
 
-#       - name: npm_docker_promote
-#         type: PromoteBuild
-#         configuration:
-#           targetRepository:      team1-docker-staging-us 
-#           includeDependencies:   false   
-#           status:                Passed
-#           comment:               Artifact passed Xray Scan
-#           copy:                  false
-#           inputResources:
-#             - name:    scanned_npm_dockerBuild_Info    # optional
-#               trigger: true       
-#           outputResources:
-#             - name: final_docker_npmBuild_Info         
+      - name: npm_docker_promote
+        type: PromoteBuild
+        configuration:
+          targetRepository:      team1-docker-staging-us 
+          includeDependencies:   false   
+          status:                Passed
+          comment:               Artifact passed Xray Scan
+          copy:                  false
+          inputResources:
+            - name:    scanned_npm_dockerBuild_Info    # optional
+              trigger: true       
+          outputResources:
+            - name: final_docker_npmBuild_Info         
