@@ -59,8 +59,8 @@ pipelines:
             - name: artifactory
           inputSteps:
             - name: npm_compile
-#           outputResources:
-#             - name: npmBuildInfo
+          outputResources:
+            - name: npmBuildInfo
       #  execution:
        #   onStart:
           #  - export inputNpmBuildStepName="npm_prep"
