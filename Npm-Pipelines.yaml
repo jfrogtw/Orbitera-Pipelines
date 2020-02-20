@@ -53,14 +53,12 @@ pipelines:
       - name: npm_publish
         type: NpmPublish
         configuration:
-          repositoryName:       team1-npm
+          repositoryName:   team1-npm
           autoPublishBuildInfo: true
           integrations:
             - name: artifactory
           inputSteps:
             - name: npm_compile
-          outputResources:
-            - name: npmBuildInfo
         execution:
           onStart:
             - export inputNpmBuildStepName="npm_prep"
@@ -71,9 +69,9 @@ pipelines:
         configuration:
           forceXrayScan:    True
           inputSteps:
-            - name:         npm_publish
+            - name:    npm_publish
           outputResources:
-            - name:     scanned_npmBuild_Info
+            - name:   npmBuild_Info
        
 
             
@@ -86,10 +84,13 @@ pipelines:
           comment:               Artifact passed Xray Scan
           copy:                  true
           inputResources:
-            - name:    scanned_npmBuild_Info    # optional
+            - name:    npmBuild_Info    # optional
               trigger: true       
           outputResources:
             - name: promoted_npmBuild_Info
+
+
+#-------------------------Docker ----------------------------------------
 
       - name: npm_docker_build
         type: DockerBuild
