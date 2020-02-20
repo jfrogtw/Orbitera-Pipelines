@@ -30,7 +30,7 @@ pipelines:
             - popd
 
 
-      - name: npm_pack_frontend
+      - name: npm_compile
         type: Bash
         configuration:
           inputSteps:
@@ -43,14 +43,11 @@ pipelines:
             # Restore file from previous step to current step
             - restore_run_files npmBuildInputGitRepo $tempStateLocation
             - pushd $tempStateLocation/tutorial/step2-create-ui-pkg
-            - ls
             - npm install shelljs
             - npm install 
             # Add files to npm pipeline target
             - add_run_files $tempStateLocation/. npmBuildInputGitRepo
             - popd
-
-
 
 
       - name: npm_publish
@@ -61,12 +58,12 @@ pipelines:
           integrations:
             - name: artifactory
           inputSteps:
-            - name: npm_pack_frontend
+            - name: npm_compile
           outputResources:
             - name: npmBuildInfo
-        execution:
-          onStart:
-            - export inputNpmBuildStepName="npm_compile"
+      #  execution:
+       #   onStart:
+          #  - export inputNpmBuildStepName="npm_prep"
 
 
       - name: npm_scan
@@ -77,12 +74,25 @@ pipelines:
           inputResources:
             - name: npmBuildInfo        
               trigger: true
-          outputResources: 
-            - name: scanned_npmBuild_Info
+#           outputResources: 
+#             - name: 
        
-         
+       
+      - name: npm_scan_publish
+        type: NpmPublish
+        configuration:
+          repositoryName:       team1-npm
+          autoPublishBuildInfo: true
+          integrations:
+            - name: artifactory
+          inputSteps:
+            - name: npm_scan
+          outputResources:
+            - name: scanned_npmBuild_Info
+#         execution:
+#           onStart:
+#             - export inputNpmBuildStepName="npm_compile"
             
-                     
       - name: npm_promote
         type: PromoteBuild
         configuration:
@@ -113,7 +123,6 @@ pipelines:
             - name: artifactory
         execution:
           onStart:
-            - printenv
             - pushd ${res_gitRepo_code_resourcePath}/tutorial/step2-create-ui-pkg
             # Creating a Folder for the fileSpec Target
             - mkdir -p npm_results
