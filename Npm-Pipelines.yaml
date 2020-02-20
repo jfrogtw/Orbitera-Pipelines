@@ -64,9 +64,11 @@ pipelines:
         configuration:
           forceXrayScan:    True
           inputSteps:
-            - name:         npm_publish
+            - name:    npm_publish
           outputResources:
             - name:     npmBuild_Info
+     
+     
       - name: npm_promote
         type: PromoteBuild
         configuration:
