@@ -61,19 +61,9 @@ pipelines:
             - name: npm_compile
           outputResources:
             - name: npmBuildInfo
-      #  execution:
-       #   onStart:
-          #  - export inputNpmBuildStepName="npm_prep"
-
-
-#       - name: npm_scan
-#         type: XrayScan
-#         configuration:
-#           #inherits from bash
-#           waitUntilFinish: true
-#           inputResources:
-#             - name: npmBuildInfo        
-#               trigger: true
+       execution:
+         onStart:
+           - export inputNpmBuildStepName="npm_prep"
 
 
       - name: npm_scan_publish
@@ -83,18 +73,8 @@ pipelines:
           inputSteps:
             - name:         npm_publish
           outputResources:
-            - name:         scanned_npmBuild_Info
+            - name:     scanned_npmBuild_Info
        
-#       - name: npm_scan_publish
-#         type: PublishBuildInfo
-#         configuration:
-#           forceXrayScan: True
-#           integrations:
-#             - name: artifactory
-#           inputSteps:
-#             - name: npm_publish
-#           outputResources:
-#             - name: scanned_npmBuild_Info
 
             
       - name: npm_promote
@@ -134,7 +114,6 @@ pipelines:
           onSuccess:
             - echo "Congrats The Docker image was build"
         
-            
 
 
       - name: Npm_docker_push
