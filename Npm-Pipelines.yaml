@@ -54,11 +54,12 @@ pipelines:
         type: NpmPublish
         configuration:
           repositoryName:   team1-npm
-          autoPublishBuildInfo: true
+          #autoPublishBuildInfo: true
           integrations:
             - name: artifactory
           inputSteps:
             - name: npm_compile
+           
         execution:
           onStart:
             - export inputNpmBuildStepName="npm_prep"
