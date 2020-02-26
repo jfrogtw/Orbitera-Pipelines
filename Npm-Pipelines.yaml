@@ -1,4 +1,6 @@
 pipelines:
+
+
   - name: npm_build
   # Global configuration section for the entire pipeline
     configuration:
@@ -7,6 +9,8 @@ pipelines:
           ArtIP: $(echo ${int_artifactory_url}|awk -F '/' '{print $3}')
           Version: 1.1.$run_number
     steps:
+     
+     
       - name: npm_prep
         type: NpmBuild
         configuration:
@@ -28,7 +32,8 @@ pipelines:
             - pushd ${res_gitRepo_code_resourcePath}/tutorial/step2-create-ui-pkg
             - npm version ${Version} --no-git-tag-version
             - popd
-      - name: npm_compile
+   
+     - name: npm_compile
         type: Bash
         configuration:
           inputSteps:
@@ -37,6 +42,7 @@ pipelines:
             - name: artifactory
         execution:
           onStart:
+            - printenv
             - export tempStateLocation="$step_tmp_dir/npmSourceState"
             # Restore file from previous step to current step
             - restore_run_files npmBuildInputGitRepo $tempStateLocation
