@@ -33,7 +33,7 @@ pipelines:
             - npm version ${Version} --no-git-tag-version
             - popd
    
-     - name: npm_compile
+      - name: npm_compile
         type: Bash
         configuration:
           inputSteps:
