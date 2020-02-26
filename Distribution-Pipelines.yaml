@@ -7,6 +7,7 @@ pipelines:
           connString: ${int_artifactory_user}:${int_artifactory_apikey}
           header: 'Content-Length:'
     steps:
+    
       - name: Create_ReleaseBundle
         type: CreateReleaseBundle
         configuration:
@@ -45,25 +46,25 @@ pipelines:
 
 #  Bash Step to  sign release bundle
 
-     - name: Sign_ReleaseBundle
-       type: Bash
-       configuration:
-         integrations:
-           - name: artifactory
-           - name: distribution
-         inputResources:
-           - name:         New_ReleaseBundle
-             trigger:      true   # default true
-         outputResources:
-           - name:         Signed_ReleaseBundle
+      - name: Sign_ReleaseBundle
+        type: Bash
+        configuration:
+          integrations:
+            - name: artifactory
+            - name: distribution
+          inputResources:
+            - name:         New_ReleaseBundle
+              trigger:      true   # default true
+          outputResources:
+            - name:         Signed_ReleaseBundle
 
-       execution:
-         onStart:
-           - printenv
-         onExecute:
-           - curl -XPOST -u${connString} --header "${header} 0" ${restCall}
-         onSuccess:
-              - echo "Release Bundle wasapproved signed"
+        execution:
+#           onStart:
+#             - printenv
+          onExecute:
+            - curl -XPOST -u${connString} --header "${header} 0" ${restCall}
+          onSuccess:
+               - echo "Release Bundle wasapproved signed"
 
 
 
