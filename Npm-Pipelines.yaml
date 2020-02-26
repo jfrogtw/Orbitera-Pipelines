@@ -45,7 +45,6 @@ pipelines:
             - export tempStateLocation="$step_tmp_dir/npmSourceState"
             # Restore file from previous step to current step
             - restore_run_files npmBuildInputGitRepo $tempStateLocation
-            - printenv
             - pushd $tempStateLocation/tutorial/step2-create-ui-pkg
             - npm install shelljs
             - npm install 
