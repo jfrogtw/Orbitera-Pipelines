@@ -96,7 +96,7 @@ pipelines:
       - name: Gradle_docker_scan
         type: XrayScan
         configuration:
-          waitUntilFinish: true
+#          waitUntilFinish: true
           inputResources:
             - name: docker_gradleBuild_Info
               trigger: true
