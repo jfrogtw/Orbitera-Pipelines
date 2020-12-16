@@ -124,7 +124,6 @@ pipelines:
       - name: npm_docker_scan
         type: XrayScan
         configuration:
-          waitUntilFinish: true
           inputResources:
             - name: docker_npmBuild_Info
               trigger: true
