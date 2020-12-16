@@ -36,7 +36,7 @@ pipelines:
       - name: gradle_scan
         type: XrayScan
         configuration:
-          waitUntilFinish: true
+#          waitUntilFinish: true
           inputResources:
             - name: gradleBuildInfo
               trigger: true
